@@ -118,8 +118,10 @@
   const CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQYJJmI49fYtxeAN3Zc6Be0V26X9Q5BfRTO34gZ20xVccZDM-stdcyKVe9av7lZjMsFE9MqaisILHnV/pub?gid=305284483&single=true&output=csv";
 
   function pct(value) {
-    if (value === "" || value === null || value === undefined || isNaN(value)) return null;
-    const n = parseFloat(value);
+    if (value === "" || value === null || value === undefined) return null;
+    const cleaned = String(value).replace("%", "").trim();
+    if (cleaned === "" || isNaN(cleaned)) return null;
+    const n = parseFloat(cleaned);
     // Soporta tanto 0.45 (fracción) como 45 (ya en %)
     return n <= 1 ? n * 100 : n;
   }
