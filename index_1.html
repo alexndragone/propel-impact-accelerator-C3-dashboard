@@ -132,10 +132,9 @@
     rows.sort((a, b) => new Date(a["Fecha envío"]) - new Date(b["Fecha envío"]));
 
     rows.forEach(row => {
-      const estado = (row["Estado"] || "").trim().toLowerCase();
-      const isSent = estado === "sent";
-      const openPct = isSent ? pct(row["Open Rate"]) : null;
-      const clickPct = isSent ? pct(row["Click Rate"]) : null;
+      const openPct = pct(row["Open Rate"]);
+      const clickPct = pct(row["Click Rate"]);
+      const isSent = openPct !== null;
 
       const block = document.createElement("div");
       block.className = "row-block";
