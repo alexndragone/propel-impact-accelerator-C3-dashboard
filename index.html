@@ -6,23 +6,39 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
 <style>
   :root{
-    --bg:#f2f2f4;
     --card:#ffffff;
     --ink:#1f2430;
     --sub:#6b7280;
-    --orange:#e8a06e;
-    --orange-dark:#d97b3e;
-    --blue:#3348a8;
+    --open-color:#2c59b7;
+    --click-color:#eb9f4f;
     --track:#ececec;
   }
   *{box-sizing:border-box;}
   body{
     margin:0;
-    background:var(--bg);
+    background:transparent;
     font-family:'Helvetica Neue', Arial, sans-serif;
     color:var(--ink);
     padding:24px 28px 48px;
   }
+  .legend{
+    display:flex;
+    align-items:center;
+    gap:22px;
+    font-size:13.5px;
+    color:#374151;
+    margin-bottom:20px;
+  }
+  .legend span{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+  }
+  .dot{
+    width:12px;height:12px;border-radius:3px;
+  }
+  .dot.open{background:var(--open-color);}
+  .dot.click{background:var(--click-color);}
   .chart{
     display:flex;
     flex-direction:column;
@@ -44,11 +60,11 @@
     text-underline-offset:4px;
   }
   .email-name a:hover{
-    color:var(--orange-dark);
-    text-decoration-color:var(--orange-dark);
+    color:var(--click-color);
+    text-decoration-color:var(--click-color);
   }
   .pending{
-    color:var(--orange-dark);
+    color:var(--click-color);
     font-size:12px;
     font-weight:600;
     margin-left:8px;
@@ -90,8 +106,8 @@
     border-radius:4px 0 0 4px;
     transition:width 0.4s ease;
   }
-  .bar-fill.orange{background:var(--orange);}
-  .bar-fill.blue{background:var(--blue);}
+  .bar-fill.orange{background:var(--open-color);}
+  .bar-fill.blue{background:var(--click-color);}
   .bar-pct{
     font-size:13.5px;
     font-weight:600;
@@ -107,6 +123,11 @@
 </style>
 </head>
 <body>
+
+<div class="legend">
+  <span><span class="dot open"></span>Open Rate</span>
+  <span><span class="dot click"></span>Click Rate</span>
+</div>
 
 <div id="chart" class="chart">
   <div class="loading">Cargando datos…</div>
